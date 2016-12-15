@@ -272,3 +272,66 @@ app.listen(app.get('port'), function() {
 });
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
+
+/**
+ * @brief return students that match a criteria
+ * @return a list of students that match a criteria
+ */
+app.post('/searchByMark', function(request, response) 
+{	
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var operator;
+    var threshold;
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria && request.body.criteria.size == 2)
+            {
+                operator = request.body.criteria[0];
+                threshold = request.body.criteria[1];
+                
+                if((operator != '<' && operator != '>') || !(threshold >= 0 && threshold <= 9)){
+                    opertor = "not defined";
+                    threshold = "not defined";
+                }
+            }
+		else {
+            opertor = "not defined";
+            threshold = "not defined";
+        }
+			
+	}
+	else
+	{
+		opertor = "body not defined";
+        threshold = "not defined";
+	}
+    
+    var list = [];
+    if (operator!="not defined" && operator!="body undefined")
+	{
+        list = studentManager.getFilteredStudents(operator, threshold);
+		
+        response.writeHead(200, headers);
+        response.end(JSON.stringify(list));
+
+	}
+    else    
+	{
+        
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify(list));
+	}   
+
+});
+
+

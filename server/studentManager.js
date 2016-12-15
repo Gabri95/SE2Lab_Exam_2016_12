@@ -135,7 +135,42 @@ var insertStudent = function insertStudent(student)
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
 
-
+/**
+ * @brief get list of students filtered by marks
+ * @return a list of user filtered
+ */
+var getFilteredStudents = function getFilteredStudents(op, thresh){
+    var list = [];
+    
+    var operation;
+    
+    switch(op){
+        case '<':
+            operation = true;
+            break;
+        case '>':
+            operation = false;
+            break;
+        default:
+            return list;
+    }
+    var student;
+    for(var i=0; i<studentList.length; i++){
+        student = {
+            ID: studentList[i].ID,
+            SSN: studentList[i].SSN,
+            name: studentList[i].name,
+            address: studentList[i].address
+        };
+        if(operation && student.mark < thresh){
+            list.push(student);
+        }else if(!operation && studente.mark > thresh){
+            list.push(student);
+        }
+    }
+    
+    return list;
+}
 
 //export functions
 exports.searchStudentID = searchStudentID; 
@@ -144,3 +179,4 @@ exports.deleteStudentID = deleteStudentID;
 exports.deleteStudentSSN = deleteStudentSSN; 
 exports.insertStudent = insertStudent;  
 exports.getList = getList; 
+exports.getFilteredStudents = getFilteredStudents;
