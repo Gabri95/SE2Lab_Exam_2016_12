@@ -67,7 +67,7 @@ $(document).ready(function()
 	$("#btn5").click(function(){
 		$.post(baseAddress + "/searchByMark",
 		{
-			mark: ">7"
+			criteria: ">7"
 		},
 		function(data, status){
 			console.log(data);
@@ -79,7 +79,7 @@ $(document).ready(function()
 	$("#btn6").click(function(){
 		$.post(baseAddress + "/searchByMark",
 		{
-			mark: "<7"
+			criteria: "<7"
 		},
 		function(data, status){
 			console.log(data);

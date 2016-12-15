@@ -162,13 +162,13 @@ var getFilteredStudents = function getFilteredStudents(op, thresh){
             name: studentList[i].name,
             address: studentList[i].address
         };
-        if(operation && student.mark < thresh){
-            list.push(student);
-        }else if(!operation && studente.mark > thresh){
+        if(operation){
+            if(studentList[i].mark < thresh)
+                list.push(student);
+        }if(studentList[i].mark > thresh){
             list.push(student);
         }
     }
-    
     return list;
 }
 

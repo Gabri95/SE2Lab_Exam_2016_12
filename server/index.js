@@ -293,8 +293,9 @@ app.post('/searchByMark', function(request, response)
 	//check body and parameters
 	if ( typeof request.body !== 'undefined' && request.body)
 	{
-		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria && request.body.criteria.size == 2)
+		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria && request.body.criteria.length == 2)
             {
+                
                 operator = request.body.criteria[0];
                 threshold = request.body.criteria[1];
                 
@@ -319,7 +320,6 @@ app.post('/searchByMark', function(request, response)
     if (operator!="not defined" && operator!="body undefined")
 	{
         list = studentManager.getFilteredStudents(operator, threshold);
-		
         response.writeHead(200, headers);
         response.end(JSON.stringify(list));
 
