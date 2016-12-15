@@ -293,11 +293,11 @@ app.post('/searchByMark', function(request, response)
 	//check body and parameters
 	if ( typeof request.body !== 'undefined' && request.body)
 	{
-		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria && request.body.criteria.length == 2)
+		if ( typeof request.body.mark !== 'undefined' && request.body.mark && request.body.mark.length == 2)
             {
                 
-                operator = request.body.criteria[0];
-                threshold = request.body.criteria[1];
+                operator = request.body.mark[0];
+                threshold = request.body.mark[1];
                 
                 if((operator != '<' && operator != '>') || !(threshold >= 0 && threshold <= 9)){
                     opertor = "not defined";
